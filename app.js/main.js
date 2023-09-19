@@ -1,11 +1,11 @@
-let productos = [];
+const traerJSON = async () => {
+	const json = await fetch("./JSON/productos.json");
+	const data = await json.json();
+	productos = data;
+	cargarProductos(productos);
+};
 
-fetch("./JSON/productos.json")
-    .then(response => response.json())
-    .then(data => {
-        productos = data;
-        cargarProductos(productos);
-    })
+traerJSON();
 
 const contenedorProductos = document.querySelector("#contenedor-productos"); 
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
@@ -32,8 +32,6 @@ function cargarProductos(productosElegidos){
 
     actualizarBotonesAgregar();
 }
-
-// cargarProductos(productos);
 
 botonesCategorias.forEach(boton =>{
     boton.addEventListener("click", (e) =>{
